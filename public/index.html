@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Streamer Content Tool</title>
+  <!-- Link naar het futuristische lettertype -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <!-- Link de externe CSS file -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Streamer Content Tool</h1>
+  <div class="container">
+    <div class="input-section">
+      <label for="keywords">Vul hier je sleutelwoorden in:</label>
+      <input type="text" id="keywords" placeholder="bijv. Call of Duty Warzone thumbnail met full gear">
+      
+      <label for="type">Selecteer type content:</label>
+      <select id="type">
+        <option value="thumbnail">Thumbnail</option>
+        <option value="avatar">Avatar</option>
+        <option value="overlay">Overlay</option>
+      </select>
+      
+      <button onclick="generateContent()">Genereer Content</button>
+    </div>
+    
+    <div id="result"></div>
+  </div>
+  
+  <script>
+    function generateContent() {
+      const keywords = document.getElementById('keywords').value;
+      const type = document.getElementById('type').value;
+      
+      fetch('/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ keywords: keywords, type: type })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById('result').innerText = "Fout: " + data.error;
+        } else {
+          document.getElementById('result').innerText =
+            "Gegenereerde Prompt:\n" + data.prompt +
+            "\n\nBeschrijving:\n" + data.beschrijving;
+        }
+      })
+      .catch(error => {
+        console.error("Er is een fout opgetreden:", error);
+        document.getElementById('result').innerText = "Er is een fout opgetreden.";
+      });
+    }
+  </script>
+</body>
+</html>

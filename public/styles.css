@@ -1,0 +1,143 @@
+/* Algemene body-stijl */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #F5F5F5; /* Licht, neutraal en minimalistisch */
+  color: #2B2B2B; /* Donkergrijs voor duidelijke leesbaarheid */
+}
+
+/* Header-balk */
+header {
+  background-color: #000000; /* Primaire accentkleur */
+  padding: 20px;
+  text-align: center;
+  border-bottom: 3px solid #39FF14; /* Lijn met interactieve accentkleur */
+  box-shadow: 0 2px 5px rgba(0, 174, 239, 0.2);
+}
+
+/* Header titel */
+header h1 {
+  margin: 0;
+  font-size: 2.8em;
+  font-weight: bold;
+  color: #FFFFFF; /* Witte tekst voor hoog contrast */
+}
+
+/* Dashboard lay-out */
+.dashboard {
+  display: flex;
+}
+
+/* Sidebar – vaste positie */
+.sidebar {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  min-width: 220px;
+  background-color: #000000; /* Primaire accentkleur */
+  border-right: 3px solid #39FF14; /* Accentlijn */
+  padding: 20px;
+  height: calc(100vh - 80px);
+  z-index: 1000;
+}
+
+/* Sidebar lijststijl */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar knoppen */
+.sidebar li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 15px; /* Rondere randen */
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+  background-color: #00AEEF;
+  color: #FFFFFF;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Actieve knop-stijl */
+.sidebar li.active {
+  background-color: #39FF14; /* Interactieve kleur */
+  color: #2B2B2B;
+}
+
+/* Hoofdcontent – schuif naar rechts zodat de sidebar niet overlapt */
+.main-content {
+  margin-left: 260px;
+  flex: 1;
+  padding: 20px;
+  background-color: #F5F5F5;
+  min-height: calc(100vh - 80px);
+}
+
+/* Containers in de hoofdcontent */
+.content-section {
+  display: none;
+}
+
+.content-section.active-section {
+  display: block;
+}
+
+/* Input-sectie */
+.input-section {
+  background: #FFFFFF;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 174, 239, 0.3);
+  margin-bottom: 30px;
+}
+
+/* Labels, inputs en select dropdowns */
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #00AEEF;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  color: #2B2B2B;
+}
+
+/* Knoppen */
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 1.2em;
+  border: 2px solid #00AEEF;
+  background-color: transparent;
+  color: #00AEEF;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #39FF14;
+  color: #2B2B2B;
+  transform: scale(1.05);
+}
+
+/* Resultaatbox */
+.result-box {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #00AEEF;
+  border-radius: 15px;
+  box-shadow: 0 0 10px #00AEEF;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "keywords": ["call of duty", "warzone", "full gear", "thumbnail"],
+    "prompt": "Ontwerp een dynamische en intense thumbnail voor Call of Duty Warzone met een karakter op de voorgrond in full gear, in een duistere, futuristische setting.",
+    "type": "thumbnail",
+    "beschrijving": "Thumbnail voor een gaming stream met een stoere uitstraling"
+  },
+  {
+    "keywords": ["avatar", "fantasy", "episch"],
+    "prompt": "Creëer een epische fantasy avatar met mystieke elementen en een krachtige uitstraling, perfect voor streaming en social media.",
+    "type": "avatar",
+    "beschrijving": "Avatar voor fantasy gamers"
+  },
+  {
+    "keywords": ["overlay", "printer", "fun", "scene"],
+    "prompt": "Genereer een speelse overlay met een animatie waarin een printer op het scherm verschijnt, geschikt voor een levendige stream.",
+    "type": "overlay",
+    "beschrijving": "Overlay met een extra animatie voor streamers"
+  }
+]
