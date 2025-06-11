@@ -1,1 +1,124 @@
 
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Streamer Content Dashboard</title>
+  <!-- Futuristisch lettertype -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <!-- Externe CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Streamer Content</h1>
+  </header>
+  
+  <div class="dashboard">
+    <!-- Sidebar met vaste menu-items -->
+    <nav class="sidebar">
+      <ul>
+        <li class="active" data-target="home">Home</li>
+        <li data-target="thumbnails">Thumbnails</li>
+        <li data-target="avatars">Avatars</li>
+        <li data-target="overlays">Overlays</li>
+        <li data-target="faceswap">Face Swap</li>
+        <li data-target="about">About</li>
+      </ul>
+    </nav>
+    
+    <!-- Hoofdcontent, zodat je in elke "pagina" eigen containers kunt plaatsen -->
+    <main class="main-content">
+      <!-- Home pagina -->
+      <section id="home" class="content-section active-section">
+        <h2>Welkom bij je Dashboard</h2>
+        <p>Gebruik de menuknoppen links om naar de verschillende functionaliteiten te navigeren.</p>
+      </section>
+      
+      <!-- Thumbnail generator pagina -->
+      <section id="thumbnails" class="content-section">
+        <h2>Thumbnails genereren</h2>
+        <div class="input-section">
+          <label for="keywords">Vul hier je sleutelwoorden in:</label>
+          <input type="text" id="keywords" placeholder="bijv. Call of Duty Warzone thumbnail met full gear">
+          <label for="type">Selecteer type:</label>
+          <select id="type">
+            <option value="thumbnail">Thumbnail</option>
+            <option value="avatar">Avatar</option>
+            <option value="overlay">Overlay</option>
+          </select>
+          <button onclick="generateContent()">Genereer</button>
+        </div>
+        <div id="result" class="result-box"></div>
+      </section>
+      
+      <!-- Andere secties voor avatars, overlays, face swap, about, etc. -->
+      <section id="avatars" class="content-section">
+        <h2>Avatars</h2>
+        <!-- Modules of containers voor avatars kunnen hier worden geplaatst -->
+      </section>
+      
+      <section id="overlays" class="content-section">
+        <h2>Overlays</h2>
+        <!-- Modules of containers voor overlays -->
+      </section>
+      
+      <section id="faceswap" class="content-section">
+        <h2>Face Swap</h2>
+        <!-- Voeg hier de interface voor jouw face swap module toe -->
+      </section>
+      
+      <section id="about" class="content-section">
+        <h2>About</h2>
+        <p>Hier kun je informatie plaatsen over de tool, en over jou als maker.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Navigatie voor het dashboard: wanneer een menu-item wordt geklikt, wijzig de actieve sectie.
+    const menuItems = document.querySelectorAll('.sidebar li');
+    const sections = document.querySelectorAll('.content-section');
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Verwijder de 'active' klasse van alle menu-items
+        menuItems.forEach(mi => mi.classList.remove('active'));
+        // Voeg 'active' toe aan het aangeklikte menu-item
+        item.classList.add('active');
+        
+        // Verberg de momenteel actieve sectie
+        document.querySelector('.content-section.active-section').classList.remove('active-section');
+        // Toon de sectie die correspondeert met de data-target waarde
+        const target = item.getAttribute('data-target');
+        document.getElementById(target).classList.add('active-section');
+      });
+    });
+
+    // Stap: Functie voor content genereren, die via POST een prompt ophaalt
+    function generateContent() {
+      const keywords = document.getElementById('keywords').value;
+      const type = document.getElementById('type').value;
+
+      fetch('/generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ keywords: keywords, type: type })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.error) {
+          document.getElementById('result').innerText = "Fout: " + data.error;
+        } else {
+          document.getElementById('result').innerText = 
+            "Gegenereerde Prompt:\n" + data.prompt + "\n\nBeschrijving:\n" + data.beschrijving;
+        }
+      })
+      .catch(error => {
+        console.error("Er is een fout opgetreden:", error);
+        document.getElementById('result').innerText = "Er is een fout opgetreden.";
+      });
+    }
+  </script>
+</body>
+</html>
